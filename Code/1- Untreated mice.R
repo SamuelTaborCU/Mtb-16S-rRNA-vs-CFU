@@ -163,7 +163,6 @@ final_output <- data.frame(
   row.names = NULL
 )
 
-
 write.csv(final_output,
           file.path(out_stats_dir, "Combined_Correlation_Regression_Results.csv"),
           row.names = FALSE)
@@ -174,11 +173,55 @@ write.csv(
   row.names = FALSE
 )
 
-ggsave(file.path(out_plot_dir, "Untreated_mice_panel_A_timecourse.jpg"),
-       pA, width = 6, height = 5, units = "in", dpi = 300)
+# Save Panel A as editable EPS
+ggsave(
+  filename = file.path(out_plot_dir, "Untreated_mice_panel_A_timecourse.eps"),
+  plot = pA,
+  device = cairo_ps,
+  width = 6,
+  height = 5,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
+)
 
-ggsave(file.path(out_plot_dir, "Untreated_mice_panel_B_scatter.jpg"),
-       pB, width = 6, height = 5, units = "in", dpi = 300)
+# Save Panel A as high-resolution TIFF
+ggsave(
+  filename = file.path(out_plot_dir, "Untreated_mice_panel_A_timecourse.tiff"),
+  plot = pA,
+  device = "tiff",
+  width = 6,
+  height = 5,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
+
+# Save Panel B as editable EPS
+ggsave(
+  filename = file.path(out_plot_dir, "Untreated_mice_panel_B_scatter.eps"),
+  plot = pB,
+  device = cairo_ps,
+  width = 6,
+  height = 5,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
+)
+
+# Save Panel B as high-resolution TIFF
+ggsave(
+  filename = file.path(out_plot_dir, "Untreated_mice_panel_B_scatter.tiff"),
+  plot = pB,
+  device = "tiff",
+  width = 6,
+  height = 5,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
 
 pA
 pB

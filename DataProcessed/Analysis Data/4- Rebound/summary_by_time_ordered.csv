@@ -1,0 +1,8 @@
+"Timepoint","Treatment.days","Washout.period","Days.since.Tx.start","CFU","Adjusted.16S.Original","rebound_date","logCFU","log16S","PreRxCFU","PreRx16S","log10CFUreduction","log1016Sreduction","Gap"
+"Pre-treatment baseline",0,0,0,25781250,2676418238.7,0,7.41,9.43,7.41,9.43,0,0,0.02
+"Upon completion of 2-week treatment",11,1,12,726562.5,280111898.8,1,5.86,8.45,7.41,9.43,-1.55,-0.98,0.61
+"Upon completion of 2-week treatment followed by 2-week recovery",11,14,25,703125,164516006.52,14,5.84,8.22,7.41,9.43,-1.57,-1.21,0.48
+"Upon completion of 2-week treatment followed by a 4-week recovery",11,28,39,1335937.5,106640548.83,28,6.12,8.02,7.41,9.43,-1.29,-1.4,0.06
+"Upon completion of 4-week treatment",25,1,26,257812.5,223304578.16,1,5.39,8.34,7.41,9.43,-2.02,-1.08,0.93
+"Upon completion of 4-week treatment followed by a 4-week recovery",25,28,53,253125,50780357.44,28,5.38,7.67,7.41,9.43,-2.03,-1.75,0.23
+"Upon completion of 8-week treatment",53,1,54,273.75,61188988.78,1,2.44,7.72,7.41,9.43,-4.98,-1.71,3.15

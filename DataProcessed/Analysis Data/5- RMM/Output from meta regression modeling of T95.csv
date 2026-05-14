@@ -1,0 +1,4 @@
+"Variables","Pseudo R^2","AIC","RMSE","LRT P-value","LRT P-value (null comparison)"
+"BL CFU + 28-day change CFU",0.9,52.95,2.05,"0.019","<0.001"
+"BL 16S rRNA + 28-day change 16S rRNA",0.24,71.9,4.4,"<0.001","0.228"
+"BL CFU + 28-day change CFU + BL 16S rRNA + 28-day change 16S rRNA",0.96,49,1.56,"Ref.","<0.001"

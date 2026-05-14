@@ -232,7 +232,27 @@ HRZE_CFU <- ggplot(long_DF1, aes(x = PD, y = Change)) +
   )
 
 HRZE_CFU
-ggsave("../DataProcessed/Plots/2-Single drugs/Single Drugs CFU vs 16S rRNA log Reduction from PreRx.jpg", width = 17, height = 6)
+ggsave(
+  filename = file.path(out_plot_dir, "Single Drugs CFU vs 16S rRNA log Reduction from PreRx.eps"),
+  plot = HRZE_CFU,
+  device = cairo_ps,
+  width = 17,
+  height = 6,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
+)
+ggsave(
+  filename = file.path(out_plot_dir, "Single Drugs CFU vs 16S rRNA log Reduction from PreRx.tiff"),
+  plot = HRZE_CFU,
+  device = "tiff",
+  width = 17,
+  height = 6,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
 
 #######################################
 ## 06 - Pairwise Wilcoxon p-values
@@ -335,7 +355,27 @@ ranking <- ggplot(df_long, aes(x = Measurement, y = Rank, group = Group, color =
   guides(color = guide_legend(override.aes = list(fill = NA, label = " ")))
 
 print(ranking)
-ggsave("../DataProcessed/Plots/2-Single drugs/Single Drugs ranking.jpg", width = 7, height = 6)
+ggsave(
+  filename = file.path(out_plot_dir, "Single Drugs ranking.eps"),
+  plot = ranking,
+  device = cairo_ps,
+  width = 7,
+  height = 6,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
+)
+ggsave(
+  filename = file.path(out_plot_dir, "Single Drugs ranking.tiff"),
+  plot = ranking,
+  device = "tiff",
+  width = 7,
+  height = 6,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
 
 #######################################
 ## 08 - Scatter: change from PreRx (Panel C)
@@ -445,6 +485,24 @@ pc <- ggplot(df, aes(x = dCFU, y = d16S, col = Group)) +
 
 pc
 ggsave(
-  "../DataProcessed/Plots/2-Single drugs/Single_drugs_panel_B_scatter.jpg",
-  pc, width = 7, height = 5, units = "in", dpi = 300
+  filename = file.path(out_plot_dir, "Single_drugs_panel_B_scatter.eps"),
+  plot = pc,
+  device = cairo_ps,
+  width = 7,
+  height = 5,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
 )
+ggsave(
+  filename = file.path(out_plot_dir, "Single_drugs_panel_B_scatter.tiff"),
+  plot = pc,
+  device = "tiff",
+  width = 7,
+  height = 5,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
+

@@ -26,6 +26,7 @@ library(cowplot)
 library(broom)
 library(jpeg)
 library(grid)
+library(tiff)
 
 file_path <- "../DataRaw/Manuscript Datasets.xlsx"
 plot_dir  <- "../DataProcessed/Plots/4- Rebound"
@@ -166,6 +167,29 @@ longitudinal_CFU_w2
 ggsave(file.path(plot_dir, "Rebound longitudinal CFU Week 2 HRZE.jpg"),
        longitudinal_CFU_w2, width = 7, height = 5)
 
+ggsave(
+  filename = file.path(plot_dir, "Rebound longitudinal CFU Week 2 HRZE.eps"),
+  plot = longitudinal_CFU_w2,
+  device = cairo_ps,
+  width = 7,
+  height = 5,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
+)
+
+ggsave(
+  filename = file.path(plot_dir, "Rebound longitudinal CFU Week 2 HRZE.tiff"),
+  plot = longitudinal_CFU_w2,
+  device = "tiff",
+  width = 7,
+  height = 5,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
+
 # ---- 16S plot (Week 2) ----
 longitudinal_16S_w2 <- ggplot(
   rna_w2_16S,
@@ -198,6 +222,29 @@ longitudinal_16S_w2 <- ggplot(
 longitudinal_16S_w2
 ggsave(file.path(plot_dir, "Rebound longitudinal 16SrRNA Week 2 HRZE.jpg"),
        longitudinal_16S_w2, width = 7, height = 5)
+
+ggsave(
+  filename = file.path(plot_dir, "Rebound longitudinal 16SrRNA Week 2 HRZE.eps"),
+  plot = longitudinal_16S_w2,
+  device = cairo_ps,
+  width = 7,
+  height = 5,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
+)
+
+ggsave(
+  filename = file.path(plot_dir, "Rebound longitudinal 16SrRNA Week 2 HRZE.tiff"),
+  plot = longitudinal_16S_w2,
+  device = "tiff",
+  width = 7,
+  height = 5,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
 
 plot_grid(longitudinal_CFU_w2, longitudinal_16S_w2, align = "hv", nrow = 1)
 
@@ -255,6 +302,29 @@ longitudinal_CFU_w4
 ggsave(file.path(plot_dir, "Rebound longitudinal CFU Week 4 HRZE.jpg"),
        longitudinal_CFU_w4, width = 7, height = 5)
 
+ggsave(
+  filename = file.path(plot_dir, "Rebound longitudinal CFU Week 4 HRZE.eps"),
+  plot = longitudinal_CFU_w4,
+  device = cairo_ps,
+  width = 7,
+  height = 5,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
+)
+
+ggsave(
+  filename = file.path(plot_dir, "Rebound longitudinal CFU Week 4 HRZE.tiff"),
+  plot = longitudinal_CFU_w4,
+  device = "tiff",
+  width = 7,
+  height = 5,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
+
 # ---- 16S plot (Week 4) ----
 rna_w4_16S_plot <- filter(rna_w4_16S, Group %in% c("UNTX", "HRZE 2 WK DOSE", "HRZE 4 WK DOSE"))
 
@@ -292,6 +362,29 @@ longitudinal_16S_w4 <- ggplot(
 longitudinal_16S_w4
 ggsave(file.path(plot_dir, "Rebound longitudinal 16SrRNA Week 4 HRZE.jpg"),
        longitudinal_16S_w4, width = 7, height = 5)
+
+ggsave(
+  filename = file.path(plot_dir, "Rebound longitudinal 16SrRNA Week 4 HRZE.eps"),
+  plot = longitudinal_16S_w4,
+  device = cairo_ps,
+  width = 7,
+  height = 5,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
+)
+
+ggsave(
+  filename = file.path(plot_dir, "Rebound longitudinal 16SrRNA Week 4 HRZE.tiff"),
+  plot = longitudinal_16S_w4,
+  device = "tiff",
+  width = 7,
+  height = 5,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
 
 plot_grid(longitudinal_CFU_w4, longitudinal_16S_w4, align = "hv", nrow = 1)
 
@@ -350,22 +443,43 @@ write.csv(wide_dataset, file.path(stats_dir, "Rebound wilcoxon pvalue.csv"), row
 ##########################################################################################################################
 
 make_img_panel <- function(path, label, hjust_val, vjust_val) {
-  im <- readJPEG(path)
+  im <- readTIFF(path, native = TRUE)
   ggplot() +
     annotation_custom(rasterGrob(im), xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) +
-    annotate("text", x = 0, y = 1, label = paste0(label, ")"),
+    annotate("text", x = -0.04, y = 1, label = paste0(label, ")"),
              hjust = hjust_val, vjust = vjust_val, size = 5, fontface = "bold") +
     theme_void()
 }
 
-plot1 <- make_img_panel(file.path(plot_dir, "Rebound longitudinal CFU Week 2 HRZE.jpg"),     "a", 18, -15.5)
-plot2 <- make_img_panel(file.path(plot_dir, "Rebound longitudinal 16SrRNA Week 2 HRZE.jpg"), "b", 17, -15.5)
-plot3 <- make_img_panel(file.path(plot_dir, "Rebound longitudinal CFU Week 4 HRZE.jpg"),     "c", 18, -15.5)
-plot4 <- make_img_panel(file.path(plot_dir, "Rebound longitudinal 16SrRNA Week 4 HRZE.jpg"), "d", 17, -15.5)
+plot1 <- make_img_panel(file.path(plot_dir, "Rebound longitudinal CFU Week 2 HRZE.tiff"),     "a", 19.2, -15.5)
+plot2 <- make_img_panel(file.path(plot_dir, "Rebound longitudinal 16SrRNA Week 2 HRZE.tiff"), "b",  18.2, -15.5)
+plot3 <- make_img_panel(file.path(plot_dir, "Rebound longitudinal CFU Week 4 HRZE.tiff"),     "c",  19.2, -15.5)
+plot4 <- make_img_panel(file.path(plot_dir, "Rebound longitudinal 16SrRNA Week 4 HRZE.tiff"), "d",  18.2, -15.5)
 
 rebound_longitudinal <- plot_grid(plot1, plot2, plot3, plot4, align = "hv", nrow = 2)
-ggsave(file.path(plot_dir, "Rebound longitudinal.jpg"), rebound_longitudinal, width = 14, height = 10)
 
+ggsave(
+  filename = file.path(plot_dir, "Figure 3 combined.eps"),
+  plot = rebound_longitudinal,
+  device = cairo_ps,
+  width = 14,
+  height = 10,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
+)
+
+ggsave(
+  filename = file.path(plot_dir, "Figure 3 combined.tiff"),
+  plot = rebound_longitudinal,
+  device = "tiff",
+  width = 14,
+  height = 10,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
 ##########################################################################################################################
 ############################################## DURATION COMPARISONS ######################################################
 ##########################################################################################################################
@@ -480,6 +594,29 @@ HRZE_CFU_wk4
 ggsave(file.path(plot_dir, "CFU vs 16S rRNA vased on Treatment duration WK4.jpg"),
        HRZE_CFU_wk4, width = 6, height = 6)
 
+ggsave(
+  filename = file.path(plot_dir, "CFU vs 16S rRNA vased on Treatment duration WK4.eps"),
+  plot = HRZE_CFU_wk4,
+  device = cairo_ps,
+  width = 6,
+  height = 6,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
+)
+
+ggsave(
+  filename = file.path(plot_dir, "CFU vs 16S rRNA vased on Treatment duration WK4.tiff"),
+  plot = HRZE_CFU_wk4,
+  device = "tiff",
+  width = 6,
+  height = 6,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
+
 # Week 8 comparison plot (days 53,54)
 long_DF_8 <- long_DF %>% filter(Days.since.Tx.start %in% c(53, 54))
 
@@ -522,6 +659,29 @@ HRZE_CFU_wk8 <- ggplot(long_DF_8, aes(x = since.TX.Start, y = Reducion)) +
 HRZE_CFU_wk8
 ggsave(file.path(plot_dir, "CFU vs 16S rRNA based on Treatment duration WK8.jpg"),
        HRZE_CFU_wk8, width = 6, height = 6)
+
+ggsave(
+  filename = file.path(plot_dir, "CFU vs 16S rRNA based on Treatment duration WK8.eps"),
+  plot = HRZE_CFU_wk8,
+  device = cairo_ps,
+  width = 6,
+  height = 6,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
+)
+
+ggsave(
+  filename = file.path(plot_dir, "CFU vs 16S rRNA based on Treatment duration WK8.tiff"),
+  plot = HRZE_CFU_wk8,
+  device = "tiff",
+  width = 6,
+  height = 6,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
 
 ##########################################################################################################################
 ############################################## LOG10 SUMMARY TABLE #######################################################
@@ -592,3 +752,4 @@ write.csv(
 #############################################
 ############## The End ######################
 #############################################
+

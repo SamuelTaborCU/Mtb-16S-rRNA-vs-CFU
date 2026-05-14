@@ -255,7 +255,7 @@ ci_up    <- slope_ci[2]
 combined_results <- data.frame(
   Correlation_Coefficient = unname(cr$estimate),
   Corr_CI_Lower = unname(cr$conf.int[1]),
-  Corr_CI_Upper = unname(cr$conf.int[2]),
+  Corr_CI_Uppper = unname(cr$conf.int[2]),
   Corr_P_value  = unname(cr$p.value),
   Slope = round(slope, 4),
   Slope_CI_Lower = round(unname(ci_low), 4),
@@ -538,17 +538,7 @@ pd <- ggplot(df_change, aes(x = dCFU, y = d16S, col = Group)) +
     "PZM"    = "black",
     "BZM"    = "gold4",
     "BZMRb"  = "blue",
-    "BPaMZ"  = "red",
-    "BDO286" = "pink",
-    "BDO830" = "blue4",
-    "BD286S" = "green",
-    "BPa286S"= "orange",
-    "BD830S" = "brown1",
-    "BPa830S" = "deepskyblue",
-    "BPaO286" = "coral3",
-    "BOS286" = "bisque",
-    "DOS286" = "azure2",
-    "PaOS286"= "firebrick"
+    "BPaMZ"  = "red"
   )) +
   annotate(
     "text", x = x_anno, y = y_anno, label = lab,
@@ -569,8 +559,26 @@ pd <- ggplot(df_change, aes(x = dCFU, y = d16S, col = Group)) +
 pd
 
 ggsave(
-  file.path(out_plot_dir, "Regimen_CFU vs_16S_28_panel_d_scatter_without_PreRx.jpg"),
-  pd, width = 7, height = 5, units = "in", dpi = 300
+  filename = file.path(out_plot_dir, "Regimen_CFU vs_16S_28_panel_d_scatter_without_PreRx.eps"),
+  plot = pd,
+  device = cairo_ps,
+  width = 7,
+  height = 5,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
+)
+
+ggsave(
+  filename = file.path(out_plot_dir, "Regimen_CFU vs_16S_28_panel_d_scatter_without_PreRx.tiff"),
+  plot = pd,
+  device = "tiff",
+  width = 7,
+  height = 5,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
 )
 
 #######################################
@@ -621,10 +629,7 @@ write.csv(df_long, file = file.path(out_stats_dir, "Regimen ranking.csv"), row.n
 group_colors <- c(
   "PreRx"="grey50","HRZE"= "#E4B811","PaMZ"= "#00A9FF","BDOS"="forestgreen",
   "BPaOS"= "#C77CFF","BPaL"="aquamarine4","PZM"="black",
-  "BZM"="gold4","BZMRb"="blue","BPaMZ"="red","BDO286" = "pink",
-  "BDO830" = "blue4","BD286S" = "green","BPa286S" = "orange",
-  "BD830S" = "brown1","BPa830S" = "deepskyblue","BPaO286" = "coral3",
-  "BOS286" = "bisque","DOS286" = "azure2","PaOS286" = "firebrick"
+  "BZM"="gold4","BZMRb"="blue","BPaMZ"="red"
 )
 
 ranking <- ggplot(df_long, aes(x = Measurement, y = Rank, group = Group, color = Group)) +
@@ -648,7 +653,29 @@ ranking <- ggplot(df_long, aes(x = Measurement, y = Rank, group = Group, color =
   guides(color = guide_legend(override.aes = list(fill = NA, label = " ")))
 
 print(ranking)
-ggsave(file.path(out_plot_dir, "Regimen ranking.jpg"), width = 7, height = 6)
+
+ggsave(
+  filename = file.path(out_plot_dir, "Regimen ranking.eps"),
+  plot = ranking,
+  device = cairo_ps,
+  width = 7,
+  height = 6,
+  units = "in",
+  bg = "white",
+  fallback_resolution = 600
+)
+
+ggsave(
+  filename = file.path(out_plot_dir, "Regimen ranking.tiff"),
+  plot = ranking,
+  device = "tiff",
+  width = 7,
+  height = 6,
+  units = "in",
+  dpi = 600,
+  compression = "lzw",
+  bg = "white"
+)
 
 #######################################
 ## 13 - Correlation table (all timepoints; without PreRx)

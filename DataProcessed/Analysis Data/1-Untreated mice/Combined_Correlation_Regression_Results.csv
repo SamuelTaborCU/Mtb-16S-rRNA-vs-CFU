@@ -1,0 +1,2 @@
+"Correlation_Coefficient","CI_Lower","CI_Upper","Correlation_P_value","Model","Slope","Slope_CI_Lower","Slope_CI_Upper","R_squared","Slope_P_value"
+0.959835307077119,0.90972861878501,0.982385937850445,0.0000000000000344686088143077,"log10_16S ~ log10_CFU",0.8316,0.7267,0.9364,0.9213,"<0.001"
